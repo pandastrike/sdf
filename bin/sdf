@@ -1,0 +1,7 @@
+#!/usr/bin/env coffee
+
+path = process.argv[2]
+query = process.argv[3..]
+
+run = require "../parse.coffee"
+run path, query

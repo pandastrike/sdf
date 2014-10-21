@@ -1,0 +1,22 @@
+{
+  "name": "sdf",
+  "version": "1.0.0-alpha-01",
+  "description": "",
+  "bin": {
+    "sdf": "./bin/sdf"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "http://github.com/pandastrike/sdf.git"
+  },
+  "main": "parser.coffee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bartlett": "^1.0.0-alpha-01",
+    "coffee-script": "^1.8.0"
+  }
+}
