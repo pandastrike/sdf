@@ -161,6 +161,8 @@ becomes
 
 * There's no formal definition of the grammar
 
+* There are only object, array, and string data types
+
 * The API is not very useful since it's entirely focused on the `sdf` CLI at the moment
 
 * No tests yet
