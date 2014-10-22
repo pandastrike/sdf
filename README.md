@@ -4,7 +4,7 @@
 
 There are a lot of very nice data formats out there. JSON has become the _lingua franca_ of the Web. YAML is a bit easier for humans to read and write. CSON is kind of in-between somewhere. Yet&hellip;I found myself wanting something nicer. Something leaner than YAML. That maybe could be the starting point for a very lean CSON implementation. That might lend itself to other data formats.
 
-I've been thinking about this [for some time now][0]. I've had partial implementatios floating around, but this is currently my favorite. It's written in CoffeeScript, checking in at less than 100 lines of code. It's very alpha, meaning the only tests at the moment is my own use of it. It's definitely got some issues, like not being able to use `:` or `?` in key names.
+I've been thinking about this [for some time now][0]. I've had partial implementatios floating around, but this is currently my favorite. It's written in CoffeeScript, checking in at less than 100 lines of code. It's definitely got some issues, like not being able to use `:` or `?` in key names.
 
 [0]:http://ajaxian.com/archives/really-simple-data-yayaml
 
@@ -75,7 +75,7 @@ $ sdf todo.sdf SDF
 
 The format can be confusing exactly because it's so flexible. The main thing is that it's whitespace significant. Nested lines become part of the parent property, either in the form of an object or an array.
 
-### Example 1
+### Simple Key-Value Pairs
 
 ```
 a: b
@@ -88,72 +88,64 @@ yields the object:
 { "a": "b", "c": "d" }
 ```
 
-This yields the same thing:
+### Nested Key-Value Pairs
+
+You can nest values:
 
 ```
 a
  b
-c
- d
-```
-
-### Example 2
-
-You can nest idenfinitely:
-
-```
-a
- b
-  c
+  c: d
 ```
 
 yields
 
 ```json
-{"a": {"b": "c"}}
+{ "a": { "b": { "c": "d" } } }
 ```
 
-and is the same as:
-
-```
-a
-  b: c
-```
-
-### Example 3
-
-You can add colons at the end of keys if it makes you feel more orderly:
-
-```
-a:
-  b: c
-```
-
-However, you can't do nested inline objects:
-
-```
-a: b: c
-```
-
-Multiple lines with no keys will turn into an array:
+### Simple Lists
 
 ```
 a
   b
   c
+  d
 ```
 
-becomes
+yields:
 
-```json
-{ "a": ["b", "c"]}
+```javascript
+{ a: [ "b", "c", "d" ] }
+```
+
+### Lists Nested With Objects
+
+```
+a
+  b
+    c
+    d
+```
+
+yields
+
+```javascript
+{ a: { b: [ "c", "d"] } }
+```
+
+## API
+
+```coffee-script
+parse = require "sdf"
+parse string
 ```
 
 ## Limitations
 
 * At the moment there are no comments
 
-* There's no way to have a one item array
+* <del>There's no way to have a one item array</del>
 
 * Key names can't use `:` or `?` (and, by the way, `?` works as a key delimiter just like ':')
 
@@ -162,10 +154,6 @@ becomes
 * There's no formal definition of the grammar
 
 * There are only object, array, and string data types
-
-* The API is not very useful since it's entirely focused on the `sdf` CLI at the moment
-
-* No tests yet
 
 ## Dumping to JSON
 

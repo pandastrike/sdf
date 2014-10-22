@@ -1,6 +1,6 @@
 {
   "name": "sdf",
-  "version": "1.0.0-alpha-01",
+  "version": "1.0.0-alpha-04",
   "description": "",
   "bin": {
     "sdf": "./bin/sdf"
@@ -9,11 +9,12 @@
     "type" : "git",
     "url" : "http://github.com/pandastrike/sdf.git"
   },
-  "main": "parser.coffee",
+  "main": "lib/parse.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "coffee test/index.coffee",
+    "prepublish": "coffee -o lib/ -c src/*.coffee"
   },
-  "author": "",
+  "author": "Dan Yoder <dan@pandastrike.com>",
   "license": "MIT",
   "dependencies": {
     "bartlett": "^1.0.0-alpha-01",

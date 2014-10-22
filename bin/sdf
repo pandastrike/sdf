@@ -3,5 +3,5 @@
 path = process.argv[2]
 query = process.argv[3..]
 
-run = require "../parse.coffee"
+run = require "../lib/cli"
 run path, query

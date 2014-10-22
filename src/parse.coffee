@@ -1,9 +1,7 @@
-{readFileSync} = require "fs"
-
 {regexp, word, ws, any, all, many,
   optional, rule, grammar} = require "bartlett"
 
-parse = do ->
+module.exports = do ->
 
   tabs = 0
 
@@ -46,13 +44,3 @@ parse = do ->
   value = any object, array
   start = any value
   grammar start
-
-module.exports = (path, query) ->
-
-  current = root = parse (readFileSync path).toString()
-
-  while query.length > 0 && current?
-    key = query.shift()
-    current = current[key]
-
-  console.log JSON.stringify(current, null, 2)
