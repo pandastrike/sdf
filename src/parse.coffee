@@ -42,5 +42,4 @@ module.exports = do ->
     (result[k] = v) for [k,v] in value
     result
   value = any object, array
-  start = any value
-  grammar start
+  grammar value
